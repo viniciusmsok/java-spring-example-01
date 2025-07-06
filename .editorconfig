@@ -1,0 +1,29 @@
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+indent_size = 2
+indent_style = space
+insert_final_newline = true
+trim_trailing_whitespace = true
+# Desativa formatação automática
+format_on_save = false
+format_on_paste = false
+format_on_type = false
+
+[*.java]
+indent_size = 2
+# Desativa formatação automática para Java
+format_on_save = false
+format_on_paste = false
+format_on_type = false
+
+[*.yml]
+indent_size = 2
+
+[*.xml]
+indent_size = 2
+
+[*.md]
+trim_trailing_whitespace = false 
