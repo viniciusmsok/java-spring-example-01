@@ -1,26 +1,30 @@
 # Vanguarda Sistemas
 
-Projeto desenvolvido com Spring Boot, Clean Architecture e DDD.
+Projeto desenvolvido com Spring Boot e Hexagonal Architecture (Ports and Adapters).
 
 ## Estrutura do Projeto
 
-O projeto segue os princípios da Clean Architecture e DDD, com a seguinte estrutura de pacotes:
+O projeto segue os princípios da Hexagonal Architecture (Ports and Adapters), com a seguinte estrutura de pacotes:
 
 ```
 src/main/java/br/com/vanguardasistemas/
-├── application/           # Casos de uso da aplicação
-│   ├── ports/            # Portas (interfaces) da aplicação
-│   │   ├── input/        # Portas de entrada (use cases)
-│   │   └── output/       # Portas de saída (repositories)
-│   └── services/         # Implementação dos casos de uso
-├── domain/               # Regras de negócio e entidades
-│   ├── entities/         # Entidades do domínio
-│   ├── repositories/     # Interfaces dos repositórios
-│   └── valueobjects/     # Objetos de valor
-├── infrastructure/       # Implementações técnicas
-│   ├── config/          # Configurações do Spring
-│   ├── persistence/     # Implementações dos repositórios
-│   └── rest/            # Controllers e DTOs
+├── application/           # Camada de aplicação
+│   ├── dto/              # Data Transfer Objects
+│   ├── mapper/           # Mappers para conversão de objetos
+│   └── usecase/          # Casos de uso da aplicação
+├── domain/               # Camada de domínio
+│   ├── model/            # Entidades e modelos de domínio
+│   └── repository/       # Interfaces dos repositórios
+├── port/                 # Portas (interfaces) da aplicação
+│   ├── api/              # Portas de entrada (APIs)
+│   └── db/               # Portas de saída (banco de dados)
+├── adapter/              # Adaptadores (implementações)
+│   ├── db/               # Implementações de banco de dados
+│   ├── entity/           # Entidades JPA
+│   ├── exception/        # Tratamento de exceções
+│   ├── interceptor/      # Interceptadores
+│   ├── mapper/           # Mappers de adaptação
+│   └── rest/             # Controllers REST
 └── VanguardaSistemasApplication.java
 ```
 
@@ -33,6 +37,7 @@ src/main/java/br/com/vanguardasistemas/
 - Maven
 - Docker & Docker Compose
 - Checkstyle
+- Liquibase
 
 ## Configuração do Ambiente
 
@@ -61,6 +66,7 @@ O projeto utiliza MySQL 8.0 com as seguintes configurações:
   - SQL: DEBUG
   - Parâmetros SQL: TRACE
   - Aplicação: DEBUG
+- Liquibase para controle de versão do banco de dados
 
 ## Executando o Projeto
 
@@ -124,13 +130,35 @@ Exemplo de resposta:
 - Checkstyle configurado para validação automática
 - EditorConfig para padronização entre IDEs
 
-### Clean Architecture
+### Hexagonal Architecture
 
-O projeto segue os princípios SOLID e as melhores práticas de Clean Architecture e DDD:
+O projeto segue os princípios da Hexagonal Architecture (Ports and Adapters):
+
+- **Domain**: Contém as regras de negócio e entidades centrais
+- **Application**: Orquestra os casos de uso e coordena as operações
+- **Ports**: Define as interfaces de entrada e saída
+- **Adapters**: Implementa as interfaces definidas pelos ports
+
+#### Vantagens desta Arquitetura:
 
 - Separação clara de responsabilidades
 - Independência de frameworks
-- Testabilidade
-- Independência de UI
-- Independência de banco de dados
-- Independência de qualquer agente externo
+- Testabilidade facilitada
+- Flexibilidade para trocar implementações
+- Manutenibilidade do código
+
+### Estrutura de Camadas
+
+1. **Domain Layer**: Regras de negócio puras
+2. **Application Layer**: Casos de uso e orquestração
+3. **Port Layer**: Contratos de entrada e saída
+4. **Adapter Layer**: Implementações concretas
+
+## Contribuição
+
+Para contribuir com o projeto:
+
+1. Siga os padrões de código estabelecidos
+2. Execute `mvn checkstyle:check` antes de commitar
+3. Mantenha a arquitetura hexagonal
+4. Escreva testes para novas funcionalidades
