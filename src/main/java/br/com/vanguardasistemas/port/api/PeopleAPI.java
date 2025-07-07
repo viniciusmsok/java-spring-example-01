@@ -22,5 +22,5 @@ public interface PeopleAPI {
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  Person findById(@PathVariable UUID id);
-} 
+  Person findById(@Valid @PathVariable UUID id);
+}

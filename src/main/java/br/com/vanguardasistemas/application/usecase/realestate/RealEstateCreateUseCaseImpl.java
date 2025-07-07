@@ -27,4 +27,4 @@ public class RealEstateCreateUseCaseImpl implements RealEstateCreateUseCase {
     RealEstate realEstate = realEstateDTOMapper.toDomain(realEstateInsertInDTO);
     return realEstateRepository.save(realEstate);
   }
-} 
+}

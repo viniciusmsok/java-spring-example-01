@@ -9,17 +9,18 @@ import br.com.vanguardasistemas.domain.model.Person;
 @Service
 public class PersonDTOMapper {
 
+  private final AddressDTOMapper addressDTOMapper;
+
+  public PersonDTOMapper(AddressDTOMapper addressDTOMapper) {
+    this.addressDTOMapper = addressDTOMapper;
+  }
+
   public Person toDomain(PersonInsertInDTO dto) {
-    Address mainAddress = null;
-    if (dto.mainAddress() != null) {
-      mainAddress = Address.builder()
-        .addressDescription(dto.mainAddress().addressDescription())
-        .addressNumber(dto.mainAddress().addressNumber())
-        .neighborhoodName(dto.mainAddress().neighborhoodName())
-        .cityName(dto.mainAddress().cityName())
-        .postalCode(dto.mainAddress().postalCode())
-        .build();
+    if (dto == null) {
+      return null;
     }
+
+    Address mainAddress = addressDTOMapper.toDomain(dto.mainAddress());
 
     return Person.builder()
       .personType(dto.personType())
@@ -28,4 +29,4 @@ public class PersonDTOMapper {
       .mainAddress(mainAddress)
       .build();
   }
-} 
+}

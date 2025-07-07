@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import br.com.vanguardasistemas.application.exception.NotFoundException;
 import br.com.vanguardasistemas.domain.model.Person;
 import br.com.vanguardasistemas.domain.repository.PersonRepository;
 
@@ -18,6 +19,11 @@ public class PersonFindByIdUseCaseImpl implements PersonFindByIdUseCase {
 
   @Override
   public Person findById(UUID id) {
-    return personRepository.findById(id);
+    Person person = personRepository.findById(id);
+    if (person == null) {
+      throw new NotFoundException("Person", id);
+    }
+
+    return person;
   }
-} 
+}

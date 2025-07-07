@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import br.com.vanguardasistemas.application.exception.NotFoundException;
 import br.com.vanguardasistemas.domain.model.ItbiPaymentSlip;
 import br.com.vanguardasistemas.domain.repository.ItbiPaymentSlipRepository;
 
@@ -18,6 +19,11 @@ public class ItbiPaymentSlipFindByIdUseCaseImpl implements ItbiPaymentSlipFindBy
 
   @Override
   public ItbiPaymentSlip findById(UUID id) {
-    return itbiPaymentSlipRepository.findById(id);
+    ItbiPaymentSlip itbiPaymentSlip = itbiPaymentSlipRepository.findById(id);
+    if (itbiPaymentSlip == null) {
+      throw new NotFoundException("ItbiPaymentSlip", id);
+    }
+
+    return itbiPaymentSlip;
   }
-} 
+}

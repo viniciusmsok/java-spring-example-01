@@ -1,30 +1,32 @@
 package br.com.vanguardasistemas.application.dto.itbipaymentslip.in;
 
+import java.util.UUID;
+
 import br.com.vanguardasistemas.adapter.rest.validation.OptionalString;
 import br.com.vanguardasistemas.adapter.rest.validation.RequiredString;
 
 public record ItbiPaymentSlipInsertInDTO(
   @RequiredString(attributeName = "taxPayerId", max = 36)
-  String taxPayerId,
+  UUID taxPayerId,
 
   @RequiredString(attributeName = "realEstateId", max = 36)
-  String realEstateId,
+  UUID realEstateId,
 
   @RequiredString(attributeName = "notaryOfficeId", max = 36)
-  String notaryOfficeId,
+  UUID notaryOfficeId,
 
   @RequiredString(attributeName = "recordOfficeId", max = 36)
-  String recordOfficeId,
+  UUID recordOfficeId,
 
   @RequiredString(attributeName = "realStateGranteeId", max = 36)
-  String realStateGranteeId,
+  UUID realStateGranteeId,
 
   @RequiredString(attributeName = "realStateGrantorId", max = 36)
-  String realStateGrantorId,
+  UUID realStateGrantorId,
 
   @RequiredString(attributeName = "transactionType", max = 50)
   String transactionType,
 
   @OptionalString(attributeName = "officialRecordCode", max = 40)
   String officialRecordCode
-) {} 
+) {}

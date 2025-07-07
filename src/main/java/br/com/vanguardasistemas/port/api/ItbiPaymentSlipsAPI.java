@@ -24,5 +24,5 @@ public interface ItbiPaymentSlipsAPI {
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  ItbiPaymentSlip findById(@PathVariable UUID id);
+  ItbiPaymentSlip findById(@Valid @PathVariable UUID id);
 }

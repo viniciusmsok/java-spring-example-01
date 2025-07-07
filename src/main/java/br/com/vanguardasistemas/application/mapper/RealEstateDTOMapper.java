@@ -9,17 +9,18 @@ import br.com.vanguardasistemas.domain.model.RealEstate;
 @Service
 public class RealEstateDTOMapper {
 
+  private final AddressDTOMapper addressDTOMapper;
+
+  public RealEstateDTOMapper(AddressDTOMapper addressDTOMapper) {
+    this.addressDTOMapper = addressDTOMapper;
+  }
+
   public RealEstate toDomain(RealEstateInsertInDTO dto) {
-    Address address = null;
-    if (dto.address() != null) {
-      address = Address.builder()
-        .addressDescription(dto.address().addressDescription())
-        .addressNumber(dto.address().addressNumber())
-        .neighborhoodName(dto.address().neighborhoodName())
-        .cityName(dto.address().cityName())
-        .postalCode(dto.address().postalCode())
-        .build();
+    if (dto == null) {
+      return null;
     }
+
+    Address address = addressDTOMapper.toDomain(dto.address());
 
     return RealEstate.builder()
       .propertyType(dto.propertyType())

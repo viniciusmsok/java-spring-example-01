@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import br.com.vanguardasistemas.application.exception.NotFoundException;
 import br.com.vanguardasistemas.domain.model.RealEstate;
 import br.com.vanguardasistemas.domain.repository.RealEstateRepository;
 
@@ -18,6 +19,11 @@ public class RealEstateFindByIdUseCaseImpl implements RealEstateFindByIdUseCase 
 
   @Override
   public RealEstate findById(UUID id) {
-    return realEstateRepository.findById(id);
+    RealEstate realEstate = realEstateRepository.findById(id);
+    if (realEstate == null) {
+      throw new NotFoundException("RealEstate", id);
+    }
+
+    return realEstate;
   }
-} 
+}

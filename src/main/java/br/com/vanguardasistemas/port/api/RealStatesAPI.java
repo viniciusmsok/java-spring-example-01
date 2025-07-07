@@ -24,5 +24,5 @@ public interface RealStatesAPI {
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  RealEstate findById(@PathVariable UUID id);
+  RealEstate findById(@Valid @PathVariable UUID id);
 } 

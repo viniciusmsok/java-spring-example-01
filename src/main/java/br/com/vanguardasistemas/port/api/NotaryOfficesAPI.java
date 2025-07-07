@@ -24,5 +24,5 @@ public interface NotaryOfficesAPI {
 
   @GetMapping("/{id}")
   @ResponseStatus(HttpStatus.OK)
-  NotaryOffice findById(@PathVariable UUID id);
+  NotaryOffice findById(@Valid @PathVariable UUID id);
 }

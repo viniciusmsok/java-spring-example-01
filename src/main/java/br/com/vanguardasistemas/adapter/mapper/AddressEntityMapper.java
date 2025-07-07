@@ -7,6 +7,7 @@ import br.com.vanguardasistemas.domain.model.Address;
 
 @Component
 public class AddressEntityMapper {
+
   public AddressEntity toEntity(Address address) {
     if (address == null) {
       return null;

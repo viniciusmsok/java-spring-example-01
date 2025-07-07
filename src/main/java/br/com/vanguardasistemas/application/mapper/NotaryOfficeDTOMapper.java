@@ -7,11 +7,15 @@ import br.com.vanguardasistemas.domain.model.NotaryOffice;
 
 @Service
 public class NotaryOfficeDTOMapper {
-  public NotaryOffice toDomain(NotaryOfficeInsertInDTO notaryOfficeInsertInDTO) {
+  public NotaryOffice toDomain(NotaryOfficeInsertInDTO dto) {
+    if (dto == null) {
+      return null;
+    }
+
     return NotaryOffice.builder()
-      .name(notaryOfficeInsertInDTO.notaryOfficeName())
-      .cityName(notaryOfficeInsertInDTO.cityName())
-      .stateName(notaryOfficeInsertInDTO.stateName())
+      .name(dto.notaryOfficeName())
+      .cityName(dto.cityName())
+      .stateName(dto.stateName())
       .build();
   }
-} 
+}

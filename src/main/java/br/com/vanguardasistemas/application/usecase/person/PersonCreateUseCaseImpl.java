@@ -27,4 +27,4 @@ public class PersonCreateUseCaseImpl implements PersonCreateUseCase {
     Person person = personDTOMapper.toDomain(personInsertInDTO);
     return personRepository.save(person);
   }
-} 
+}

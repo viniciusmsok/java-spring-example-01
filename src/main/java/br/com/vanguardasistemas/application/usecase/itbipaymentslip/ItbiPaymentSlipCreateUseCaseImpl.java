@@ -7,25 +7,91 @@ import br.com.vanguardasistemas.application.dto.itbipaymentslip.in.ItbiPaymentSl
 import br.com.vanguardasistemas.application.mapper.ItbiPaymentSlipDTOMapper;
 import br.com.vanguardasistemas.domain.model.ItbiPaymentSlip;
 import br.com.vanguardasistemas.domain.repository.ItbiPaymentSlipRepository;
+import br.com.vanguardasistemas.domain.repository.PersonRepository;
+import br.com.vanguardasistemas.domain.repository.RealEstateRepository;
+import br.com.vanguardasistemas.domain.repository.NotaryOfficeRepository;
+import br.com.vanguardasistemas.domain.model.Person;
+import br.com.vanguardasistemas.domain.model.RealEstate;
+import br.com.vanguardasistemas.domain.model.NotaryOffice;
+import java.util.UUID;
+import br.com.vanguardasistemas.application.exception.NotFoundException;
 
 @Service
 public class ItbiPaymentSlipCreateUseCaseImpl implements ItbiPaymentSlipCreateUseCase {
 
   private final ItbiPaymentSlipRepository itbiPaymentSlipRepository;
   private final ItbiPaymentSlipDTOMapper itbiPaymentSlipDTOMapper;
+  private final PersonRepository personRepository;
+  private final RealEstateRepository realEstateRepository;
+  private final NotaryOfficeRepository notaryOfficeRepository;
 
   public ItbiPaymentSlipCreateUseCaseImpl(
     ItbiPaymentSlipRepository itbiPaymentSlipRepository,
-    ItbiPaymentSlipDTOMapper itbiPaymentSlipDTOMapper
+    ItbiPaymentSlipDTOMapper itbiPaymentSlipDTOMapper,
+    PersonRepository personRepository,
+    RealEstateRepository realEstateRepository,
+    NotaryOfficeRepository notaryOfficeRepository
   ) {
     this.itbiPaymentSlipRepository = itbiPaymentSlipRepository;
     this.itbiPaymentSlipDTOMapper = itbiPaymentSlipDTOMapper;
+    this.personRepository = personRepository;
+    this.realEstateRepository = realEstateRepository;
+    this.notaryOfficeRepository = notaryOfficeRepository;
   }
 
   @Override
   @Transactional
   public ItbiPaymentSlip create(ItbiPaymentSlipInsertInDTO itbiPaymentSlipInsertInDTO) {
-    ItbiPaymentSlip itbiPaymentSlip = itbiPaymentSlipDTOMapper.toDomain(itbiPaymentSlipInsertInDTO);
+    UUID taxPayerId = itbiPaymentSlipInsertInDTO.taxPayerId();
+    Person taxPayer = personRepository.findById(taxPayerId);
+    if (taxPayer == null) {
+      throw new NotFoundException("Person", taxPayerId);
+    }
+
+    UUID realEstateId = itbiPaymentSlipInsertInDTO.realEstateId();
+    RealEstate realEstate = realEstateRepository.findById(realEstateId);
+    if (realEstate == null) {
+      throw new NotFoundException("RealEstate", realEstateId);
+    }
+
+    UUID notaryOfficeId = itbiPaymentSlipInsertInDTO.notaryOfficeId();
+    NotaryOffice notaryOffice = notaryOfficeRepository.findById(notaryOfficeId);
+    if (notaryOffice == null) {
+      throw new NotFoundException("NotaryOffice", notaryOfficeId);
+    }
+
+    UUID recordOfficeId = itbiPaymentSlipInsertInDTO.recordOfficeId();
+    Person recordOffice = personRepository.findById(recordOfficeId);
+    if (recordOffice == null) {
+      throw new NotFoundException("Person", recordOfficeId);
+    }
+
+    UUID realStateGranteeId = itbiPaymentSlipInsertInDTO.realStateGranteeId();
+    Person realStateGrantee = personRepository.findById(realStateGranteeId);
+    if (realStateGrantee == null) {
+      throw new NotFoundException("Person", realStateGranteeId);
+    }
+
+    Person realStateGrantor = personRepository.findById(
+      itbiPaymentSlipInsertInDTO.realStateGrantorId()
+    );
+    if (realStateGrantor == null) {
+      throw new NotFoundException(
+        "Person",
+        itbiPaymentSlipInsertInDTO.realStateGrantorId()
+      );
+    }
+
+    ItbiPaymentSlip itbiPaymentSlip = itbiPaymentSlipDTOMapper.toDomain(
+      itbiPaymentSlipInsertInDTO,
+      taxPayer,
+      realEstate,
+      notaryOffice,
+      recordOffice,
+      realStateGrantee,
+      realStateGrantor
+    );
+
     return itbiPaymentSlipRepository.save(itbiPaymentSlip);
   }
 }

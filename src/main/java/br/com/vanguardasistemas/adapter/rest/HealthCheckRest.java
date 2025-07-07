@@ -5,14 +5,12 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vanguardasistemas.adapter.mapper.HealthCheckDTOMapper;
 import br.com.vanguardasistemas.port.api.HealthCheckAPI;
 
 @RestController
-@RequestMapping("/health-check")
 public class HealthCheckRest implements HealthCheckAPI {
 
   private final HealthCheckDTOMapper healthCheckDTOMapper;

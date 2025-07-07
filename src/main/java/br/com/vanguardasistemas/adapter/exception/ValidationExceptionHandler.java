@@ -14,10 +14,10 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 import jakarta.servlet.http.HttpServletRequest;
 
 @RestControllerAdvice
-public class GlobalExceptionHandler {
+public class ValidationExceptionHandler {
 
   @ExceptionHandler(MethodArgumentNotValidException.class)
-  public ResponseEntity<ValidationErrorResponse> handleValidationExceptions(
+  public ResponseEntity<DefaultErrorResponse> handleValidationExceptions(
     MethodArgumentNotValidException ex,
     HttpServletRequest request
   ) {
@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
       .map(FieldError::getDefaultMessage)
       .collect(Collectors.toList());
 
-    ValidationErrorResponse response = new ValidationErrorResponse(
+    DefaultErrorResponse response = new DefaultErrorResponse(
       LocalDateTime.now(),
       HttpStatus.BAD_REQUEST.value(),
       "Validation Error",
@@ -37,4 +37,4 @@ public class GlobalExceptionHandler {
 
     return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(response);
   }
-} 
+}

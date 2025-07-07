@@ -4,6 +4,7 @@ import java.util.UUID;
 
 import org.springframework.stereotype.Service;
 
+import br.com.vanguardasistemas.application.exception.NotFoundException;
 import br.com.vanguardasistemas.domain.model.NotaryOffice;
 import br.com.vanguardasistemas.domain.repository.NotaryOfficeRepository;
 
@@ -18,6 +19,11 @@ public class NotaryOfficeFindByIdUseCaseImpl implements NotaryOfficeFindByIdUseC
 
   @Override
   public NotaryOffice findById(UUID id) {
-    return notaryOfficeRepository.findById(id);
+    NotaryOffice notaryOffice = notaryOfficeRepository.findById(id);
+    if (notaryOffice == null) {
+      throw new NotFoundException("NotaryOffice", id);
+    }
+
+    return notaryOffice;
   }
 } 
