@@ -16,7 +16,7 @@ public class ItbiPaymentSlipDTOMapper {
     Person taxPayer,
     RealEstate realEstate,
     NotaryOffice notaryOffice,
-    Person recordOffice,
+    NotaryOffice recordOffice,
     Person realStateGrantee,
     Person realStateGrantor
   ) {

@@ -4,24 +4,25 @@ import java.util.UUID;
 
 import br.com.vanguardasistemas.adapter.rest.validation.OptionalString;
 import br.com.vanguardasistemas.adapter.rest.validation.RequiredString;
+import br.com.vanguardasistemas.adapter.rest.validation.RequiredUUID;
 
 public record ItbiPaymentSlipInsertInDTO(
-  @RequiredString(attributeName = "taxPayerId", max = 36)
+  @RequiredUUID(attributeName = "taxPayerId")
   UUID taxPayerId,
 
-  @RequiredString(attributeName = "realEstateId", max = 36)
+  @RequiredUUID(attributeName = "realEstateId")
   UUID realEstateId,
 
-  @RequiredString(attributeName = "notaryOfficeId", max = 36)
+  @RequiredUUID(attributeName = "notaryOfficeId")
   UUID notaryOfficeId,
 
-  @RequiredString(attributeName = "recordOfficeId", max = 36)
+  @RequiredUUID(attributeName = "recordOfficeId")
   UUID recordOfficeId,
 
-  @RequiredString(attributeName = "realStateGranteeId", max = 36)
+  @RequiredUUID(attributeName = "realStateGranteeId")
   UUID realStateGranteeId,
 
-  @RequiredString(attributeName = "realStateGrantorId", max = 36)
+  @RequiredUUID(attributeName = "realStateGrantorId")
   UUID realStateGrantorId,
 
   @RequiredString(attributeName = "transactionType", max = 50)

@@ -61,9 +61,9 @@ public class ItbiPaymentSlipCreateUseCaseImpl implements ItbiPaymentSlipCreateUs
     }
 
     UUID recordOfficeId = itbiPaymentSlipInsertInDTO.recordOfficeId();
-    Person recordOffice = personRepository.findById(recordOfficeId);
+    NotaryOffice recordOffice = notaryOfficeRepository.findById(recordOfficeId);
     if (recordOffice == null) {
-      throw new NotFoundException("Person", recordOfficeId);
+      throw new NotFoundException("NotaryOffice", recordOfficeId);
     }
 
     UUID realStateGranteeId = itbiPaymentSlipInsertInDTO.realStateGranteeId();

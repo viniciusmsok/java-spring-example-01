@@ -19,7 +19,7 @@ public class ItbiPaymentSlip {
   private Person taxPayer;
   private RealEstate realEstate;
   private NotaryOffice notaryOffice;
-  private Person recordOffice;
+  private NotaryOffice recordOffice;
   private Person realStateGrantee;
   private Person realStateGrantor;
   private String transactionType;

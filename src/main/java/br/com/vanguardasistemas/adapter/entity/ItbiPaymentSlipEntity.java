@@ -48,7 +48,7 @@ public class ItbiPaymentSlipEntity {
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "record_office_id")
-  private PersonEntity recordOffice;
+  private NotaryOfficeEntity recordOffice;
 
   @ManyToOne(fetch = FetchType.LAZY)
   @JoinColumn(name = "real_state_grantee_id")
