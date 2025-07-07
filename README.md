@@ -1,34 +1,8 @@
 # Vanguarda Sistemas
 
-Projeto desenvolvido com Spring Boot e Hexagonal Architecture (Ports and Adapters).
+Project developed with Spring Boot and Hexagonal Architecture (Ports and Adapters).
 
-## Estrutura do Projeto
-
-O projeto segue os princípios da Hexagonal Architecture (Ports and Adapters), com a seguinte estrutura de pacotes:
-
-```
-src/main/java/br/com/vanguardasistemas/
-├── application/           # Camada de aplicação
-│   ├── dto/              # Data Transfer Objects
-│   ├── mapper/           # Mappers para conversão de objetos
-│   └── usecase/          # Casos de uso da aplicação
-├── domain/               # Camada de domínio
-│   ├── model/            # Entidades e modelos de domínio
-│   └── repository/       # Interfaces dos repositórios
-├── port/                 # Portas (interfaces) da aplicação
-│   ├── api/              # Portas de entrada (APIs)
-│   └── db/               # Portas de saída (banco de dados)
-├── adapter/              # Adaptadores (implementações)
-│   ├── db/               # Implementações de banco de dados
-│   ├── entity/           # Entidades JPA
-│   ├── exception/        # Tratamento de exceções
-│   ├── interceptor/      # Interceptadores
-│   ├── mapper/           # Mappers de adaptação
-│   └── rest/             # Controllers REST
-└── VanguardaSistemasApplication.java
-```
-
-## Tecnologias Utilizadas
+## Technologies Used
 
 - Java 21
 - Spring Boot 3.2.3
@@ -39,57 +13,113 @@ src/main/java/br/com/vanguardasistemas/
 - Checkstyle
 - Liquibase
 
-## Configuração do Ambiente
+## Project Structure
 
-### Pré-requisitos
+The project follows the principles of Hexagonal Architecture (Ports and Adapters), with the following package structure:
+
+```
+src/main/java/br/com/vanguardasistemas/
+├── application/           # Application layer
+│   ├── dto/              # Data Transfer Objects
+│   ├── mapper/           # Object mappers
+│   └── usecase/          # Application use cases
+├── domain/               # Domain layer
+│   ├── model/            # Domain entities and value objects
+│   └── repository/       # Repository interfaces
+├── port/                 # Application ports (interfaces)
+│   ├── api/              # Input ports (APIs)
+│   └── db/               # Output ports (database)
+├── adapter/              # Adapters (implementations)
+│   ├── db/               # Database implementations
+│   ├── entity/           # JPA entities
+│   ├── exception/        # Exception handling
+│   ├── interceptor/      # Interceptors
+│   ├── mapper/           # Adapter mappers
+│   └── rest/             # REST controllers
+└── VanguardaSistemasApplication.java
+```
+
+### Criteria for Creating New Classes
+
+- **application/**
+  - **dto/**: Create DTO classes to transfer data between layers, especially for API input and output. Each DTO should represent a clear and specific data contract for the use case and include technical validations for type and required fields.
+  - **mapper/**: Create mappers for converting between domain entities, DTOs, and persistence entities. Use mappers to centralize data transformation logic. For now, there is no real need to create interfaces because:
+    * Input and output are implicit;
+    * They will rarely need different implementations;
+    * They do not use specific technology (subject to replacement) for conversion operations.
+  - **usecase/**: Each application use case should be represented by a class in this folder. Use cases orchestrate business operations, coordinating interactions between domain and ports/adapters.
+
+- **domain/**
+  - **model/**: Create entities and value objects that represent core domain concepts. These classes should be framework-independent and contain only pure business rules.
+  - **repository/**: Define repository interfaces that abstract persistence operations. Do not implement data access logic here, only contracts. In this project, we chose to build them free of object-relational mapping frameworks to make the clean architecture divisions clearer.
+
+- **port/**
+  - **api/**: Create interfaces that define the contracts for input interactions and potential return for external consumer services (e.g., REST, messaging). Use to abstract communication details.
+  - **db/**: Create interfaces that define output contracts for data persistence. Allows swapping database implementations without impacting the domain.
+
+- **adapter/**
+  - **db/**: Implement repositories and database integrations using frameworks like JPA/Hibernate, following DDD criteria, understanding that not every entity has its own repository and that these repository classes are created for the aggregate root.
+  - **entity/**: Create persistence-specific entities, usually annotated with JPA. Understanding that both relational data structures and other widely used structures (NoSQL, memory, key/value...), as well as the object-oriented model, have their limitations, this difference results in the separation of entity and domain. In many projects, they are implemented "together", however, even with proper use of annotations, we understand that there is still some conflict/interference in their respective responsibilities, justifying a clearer division, so:
+    * The domain establishes the data structure for the main operations in the system, focusing on object orientation;
+    * The entity classes aim to map the input/output data format with the persistence solution, in this context, focusing on the relational structure.
+  - **exception/**: Centralize custom exceptions and global handlers.
+  - **interceptor/**: Implement interceptors for cross-cutting concerns (e.g., logging, authentication).
+  - **mapper/**: Implement mappers specific to adaptation between external and internal layers.
+  - **rest/**: Implement REST controllers, endpoints, and input/output DTOs.
+
+> **Tip:** Always follow the single responsibility principle. Each class should have a clear purpose and be in the layer/package that best represents its function in the system.
+
+## Configuring the Environment
+
+### Prerequisites
 
 1. Java 21
-2. Docker e Docker Compose
+2. Docker and Docker Compose
 3. Maven
 
-### Banco de Dados
+### Database
 
-O projeto utiliza MySQL 8.0 com as seguintes configurações:
+The project uses MySQL 8.0 with the following configurations:
 
-- Porta: 3306
+- Port: 3306
 - Database: payment_slip
-- Usuário: root
-- Senha: dados123
+- User: root
+- Password: dados123
 
-### Configurações do Projeto
+### Project Configurations
 
-- Pool de conexões Hikari configurado com:
-  - Timeout: 3 segundos
-  - Máximo de conexões: 200
-  - Mínimo de conexões ociosas: 1
-- Logging configurado para:
+- Hikari connection pool configured with:
+  - Timeout: 3 seconds
+  - Maximum connections: 200
+  - Minimum idle connections: 1
+- Logging configured for:
   - SQL: DEBUG
-  - Parâmetros SQL: TRACE
-  - Aplicação: DEBUG
-- Liquibase para controle de versão do banco de dados
+  - SQL Parameters: TRACE
+  - Application: DEBUG
+- Liquibase for database version control
 
-## Executando o Projeto
+## Running the Project
 
-### Usando Docker Compose
+### Using Docker Compose
 
 ```bash
-# Iniciar todos os serviços
+# Start all services
 docker-compose up -d
 
-# Verificar logs
+# Check logs
 docker-compose logs -f
 
-# Parar todos os serviços
+# Stop all services
 docker-compose down
 ```
 
-### Usando Maven
+### Using Maven
 
 ```bash
-# Compilar e executar
+# Compile and execute
 mvn spring-boot:run
 
-# Verificar estilo do código
+# Check code style
 mvn checkstyle:check
 ```
 
@@ -101,14 +131,14 @@ mvn checkstyle:check
 GET /health
 ```
 
-Retorna o status do sistema incluindo:
+Returns the system status including:
 
-- Status geral da aplicação
-- Status do banco de dados
+- General application status
+- Database status
 - Timestamp
-- Mensagens de erro (se houver)
+- Error messages (if any)
 
-Exemplo de resposta:
+Example response:
 
 ```json
 {
@@ -122,43 +152,43 @@ Exemplo de resposta:
 }
 ```
 
-## Desenvolvimento
+## Development
 
-### Padrões de Código
+### Code Patterns
 
-- Indentação: 2 espaços
-- Checkstyle configurado para validação automática
-- EditorConfig para padronização entre IDEs
+- Indentation: 2 spaces
+- Checkstyle configured for automatic validation
+- EditorConfig for code standardization between IDEs
 
 ### Hexagonal Architecture
 
-O projeto segue os princípios da Hexagonal Architecture (Ports and Adapters):
+The project follows the principles of Hexagonal Architecture (Ports and Adapters):
 
-- **Domain**: Contém as regras de negócio e entidades centrais
-- **Application**: Orquestra os casos de uso e coordena as operações
-- **Ports**: Define as interfaces de entrada e saída
-- **Adapters**: Implementa as interfaces definidas pelos ports
+- **Domain**: Contains business rules and central entities
+- **Application**: Orchestrates use cases and coordinates operations
+- **Ports**: Defines input and output interfaces
+- **Adapters**: Implements interfaces defined by ports
 
-#### Vantagens desta Arquitetura:
+#### Advantages of This Architecture:
 
-- Separação clara de responsabilidades
-- Independência de frameworks
-- Testabilidade facilitada
-- Flexibilidade para trocar implementações
-- Manutenibilidade do código
+- Clear separation of responsibilities
+- Independence from frameworks
+- Facilitated testability
+- Flexible for swapping implementations
+- Maintainable code
 
-### Estrutura de Camadas
+### Layer Structure
 
-1. **Domain Layer**: Regras de negócio puras
-2. **Application Layer**: Casos de uso e orquestração
-3. **Port Layer**: Contratos de entrada e saída
-4. **Adapter Layer**: Implementações concretas
+1. **Domain Layer**: Pure business rules
+2. **Application Layer**: Use cases and orchestration
+3. **Port Layer**: Input and output interfaces
+4. **Adapter Layer**: Concrete implementations
 
-## Contribuição
+## Contribution
 
-Para contribuir com o projeto:
+To contribute to the project:
 
-1. Siga os padrões de código estabelecidos
-2. Execute `mvn checkstyle:check` antes de commitar
-3. Mantenha a arquitetura hexagonal
-4. Escreva testes para novas funcionalidades
+1. Follow the established code patterns
+2. Execute `mvn checkstyle:check` before committing
+3. Maintain the hexagonal architecture
+4. Write tests for new features
