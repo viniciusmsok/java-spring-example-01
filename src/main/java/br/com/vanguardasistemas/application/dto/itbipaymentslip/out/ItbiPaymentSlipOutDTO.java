@@ -12,8 +12,8 @@ public record ItbiPaymentSlipOutDTO(
   RealEstateOutDTO realEstate,
   NotaryOfficeOutDTO notaryOffice,
   PersonOutDTO recordOffice,
-  PersonOutDTO realStateGrantee,
-  PersonOutDTO realStateGrantor,
+  PersonOutDTO realEstateGrantee,
+  PersonOutDTO realEstateGrantor,
   String transactionType,
   String officialRecordCode
 ) {} 

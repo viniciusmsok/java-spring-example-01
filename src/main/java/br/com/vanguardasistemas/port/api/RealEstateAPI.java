@@ -15,7 +15,7 @@ import br.com.vanguardasistemas.domain.model.RealEstate;
 import jakarta.validation.Valid;
 
 @RequestMapping("/real-estates")
-public interface RealStatesAPI {
+public interface RealEstateAPI {
   @PostMapping
   @ResponseStatus(HttpStatus.CREATED)
   RealEstate createRealEstate(

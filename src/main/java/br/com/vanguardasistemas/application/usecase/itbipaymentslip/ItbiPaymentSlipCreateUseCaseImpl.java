@@ -66,19 +66,19 @@ public class ItbiPaymentSlipCreateUseCaseImpl implements ItbiPaymentSlipCreateUs
       throw new NotFoundException("NotaryOffice", recordOfficeId);
     }
 
-    UUID realStateGranteeId = itbiPaymentSlipInsertInDTO.realStateGranteeId();
-    Person realStateGrantee = personRepository.findById(realStateGranteeId);
-    if (realStateGrantee == null) {
-      throw new NotFoundException("Person", realStateGranteeId);
+    UUID realEstateGranteeId = itbiPaymentSlipInsertInDTO.realEstateGranteeId();
+    Person realEstateGrantee = personRepository.findById(realEstateGranteeId);
+    if (realEstateGrantee == null) {
+      throw new NotFoundException("Person", realEstateGranteeId);
     }
 
-    Person realStateGrantor = personRepository.findById(
-      itbiPaymentSlipInsertInDTO.realStateGrantorId()
+    Person realEstateGrantor = personRepository.findById(
+      itbiPaymentSlipInsertInDTO.realEstateGrantorId()
     );
-    if (realStateGrantor == null) {
+    if (realEstateGrantor == null) {
       throw new NotFoundException(
         "Person",
-        itbiPaymentSlipInsertInDTO.realStateGrantorId()
+        itbiPaymentSlipInsertInDTO.realEstateGrantorId()
       );
     }
 
@@ -88,8 +88,8 @@ public class ItbiPaymentSlipCreateUseCaseImpl implements ItbiPaymentSlipCreateUs
       realEstate,
       notaryOffice,
       recordOffice,
-      realStateGrantee,
-      realStateGrantor
+      realEstateGrantee,
+      realEstateGrantor
     );
 
     return itbiPaymentSlipRepository.save(itbiPaymentSlip);

@@ -17,16 +17,16 @@ public class ItbiPaymentSlipDTOMapper {
     RealEstate realEstate,
     NotaryOffice notaryOffice,
     NotaryOffice recordOffice,
-    Person realStateGrantee,
-    Person realStateGrantor
+    Person realEstateGrantee,
+    Person realEstateGrantor
   ) {
     return ItbiPaymentSlip.builder()
       .taxPayer(taxPayer)
       .realEstate(realEstate)
       .notaryOffice(notaryOffice)
       .recordOffice(recordOffice)
-      .realStateGrantee(realStateGrantee)
-      .realStateGrantor(realStateGrantor)
+      .realEstateGrantee(realEstateGrantee)
+      .realEstateGrantor(realEstateGrantor)
       .transactionType(itbiPaymentSlipInsertInDTO.transactionType())
       .officialRecordCode(itbiPaymentSlipInsertInDTO.officialRecordCode())
       .build();

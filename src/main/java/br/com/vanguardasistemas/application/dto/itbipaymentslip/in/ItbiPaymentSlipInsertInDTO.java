@@ -19,11 +19,11 @@ public record ItbiPaymentSlipInsertInDTO(
   @RequiredUUID(attributeName = "recordOfficeId")
   UUID recordOfficeId,
 
-  @RequiredUUID(attributeName = "realStateGranteeId")
-  UUID realStateGranteeId,
+  @RequiredUUID(attributeName = "realEstateGranteeId")
+  UUID realEstateGranteeId,
 
-  @RequiredUUID(attributeName = "realStateGrantorId")
-  UUID realStateGrantorId,
+  @RequiredUUID(attributeName = "realEstateGrantorId")
+  UUID realEstateGrantorId,
 
   @RequiredString(attributeName = "transactionType", max = 50)
   String transactionType,

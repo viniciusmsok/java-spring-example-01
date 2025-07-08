@@ -51,12 +51,12 @@ public class ItbiPaymentSlipEntity {
   private NotaryOfficeEntity recordOffice;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "real_state_grantee_id")
-  private PersonEntity realStateGrantee;
+  @JoinColumn(name = "real_estate_grantee_id")
+  private PersonEntity realEstateGrantee;
 
   @ManyToOne(fetch = FetchType.LAZY)
-  @JoinColumn(name = "real_state_grantor_id")
-  private PersonEntity realStateGrantor;
+  @JoinColumn(name = "real_estate_grantor_id")
+  private PersonEntity realEstateGrantor;
 
   @Column(name = "transaction_type", nullable = false, length = 50)
   private String transactionType;

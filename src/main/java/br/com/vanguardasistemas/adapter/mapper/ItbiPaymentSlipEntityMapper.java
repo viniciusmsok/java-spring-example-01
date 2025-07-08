@@ -32,8 +32,8 @@ public class ItbiPaymentSlipEntityMapper {
       .realEstate(realEstateEntityMapper.toEntity(domain.getRealEstate()))
       .notaryOffice(notaryOfficeEntityMapper.toEntity(domain.getNotaryOffice()))
       .recordOffice(notaryOfficeEntityMapper.toEntity(domain.getRecordOffice()))
-      .realStateGrantee(personEntityMapper.toEntity(domain.getRealStateGrantee()))
-      .realStateGrantor(personEntityMapper.toEntity(domain.getRealStateGrantor()))
+      .realEstateGrantee(personEntityMapper.toEntity(domain.getRealEstateGrantee()))
+      .realEstateGrantor(personEntityMapper.toEntity(domain.getRealEstateGrantor()))
       .transactionType(domain.getTransactionType())
       .officialRecordCode(domain.getOfficialRecordCode())
       .build();
@@ -50,8 +50,8 @@ public class ItbiPaymentSlipEntityMapper {
       .realEstate(realEstateEntityMapper.toDomain(entity.getRealEstate()))
       .notaryOffice(notaryOfficeEntityMapper.toDomain(entity.getNotaryOffice()))
       .recordOffice(notaryOfficeEntityMapper.toDomain(entity.getRecordOffice()))
-      .realStateGrantee(personEntityMapper.toDomain(entity.getRealStateGrantee()))
-      .realStateGrantor(personEntityMapper.toDomain(entity.getRealStateGrantor()))
+      .realEstateGrantee(personEntityMapper.toDomain(entity.getRealEstateGrantee()))
+      .realEstateGrantor(personEntityMapper.toDomain(entity.getRealEstateGrantor()))
       .transactionType(entity.getTransactionType())
       .officialRecordCode(entity.getOfficialRecordCode())
       .build();

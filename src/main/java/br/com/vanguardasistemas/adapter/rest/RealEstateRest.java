@@ -2,21 +2,24 @@ package br.com.vanguardasistemas.adapter.rest;
 
 import java.util.UUID;
 
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vanguardasistemas.application.dto.realestate.in.RealEstateInsertInDTO;
 import br.com.vanguardasistemas.application.usecase.realestate.RealEstateCreateUseCase;
 import br.com.vanguardasistemas.application.usecase.realestate.RealEstateFindByIdUseCase;
 import br.com.vanguardasistemas.domain.model.RealEstate;
-import br.com.vanguardasistemas.port.api.RealStatesAPI;
+import br.com.vanguardasistemas.port.api.RealEstateAPI;
+import jakarta.validation.Valid;
 
 @RestController
-public class RealStatesRest implements RealStatesAPI {
+public class RealEstateRest implements RealEstateAPI {
 
   private final RealEstateCreateUseCase realEstateCreateUseCase;
   private final RealEstateFindByIdUseCase realEstateFindByIdUseCase;
 
-  public RealStatesRest(
+  public RealEstateRest(
     RealEstateCreateUseCase realEstateCreateUseCase,
     RealEstateFindByIdUseCase realEstateFindByIdUseCase
   ) {
@@ -26,13 +29,13 @@ public class RealStatesRest implements RealStatesAPI {
 
   @Override
   public RealEstate createRealEstate(
-    RealEstateInsertInDTO realEstateInDTO
+    @Valid @RequestBody RealEstateInsertInDTO realEstateInsertInDTO
   ) {
-    return realEstateCreateUseCase.create(realEstateInDTO);
+    return realEstateCreateUseCase.create(realEstateInsertInDTO);
   }
 
   @Override
-  public RealEstate findById(UUID id) {
+  public RealEstate findById(@PathVariable UUID id) {
     return realEstateFindByIdUseCase.findById(id);
   }
 }
