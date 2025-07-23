@@ -26,14 +26,14 @@ FOREIGN KEY (tax_payer_id)
 REFERENCES people(person_id);
 
 ALTER TABLE itbi_payment_slips
-ADD CONSTRAINT fk_itbi_paym_sl_rl_est_grantee
+ADD CONSTRAINT fk_itbi_paym_sl_people_grantee
 FOREIGN KEY (real_estate_grantee_id)
-REFERENCES real_estates(real_estate_id);
+REFERENCES people(person_id);
 
 ALTER TABLE itbi_payment_slips
-ADD CONSTRAINT fk_itbi_paym_sl_rl_est_grantor
+ADD CONSTRAINT fk_itbi_paym_sl_people_grantor
 FOREIGN KEY (real_estate_grantor_id)
-REFERENCES real_estates(real_estate_id);
+REFERENCES people(person_id);
 
 ALTER TABLE itbi_payment_slips
 ADD CONSTRAINT fk_itbi_paym_sl_real_estate
