@@ -10,6 +10,12 @@ import br.com.vanguardasistemas.application.usecase.itbipaymentslip.ItbiPaymentS
 import br.com.vanguardasistemas.domain.model.ItbiPaymentSlip;
 import br.com.vanguardasistemas.port.api.ItbiPaymentSlipsAPI;
 
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
+
+
+@Tag(name = "ITBI", description = "Operations related to ITBI payment slips")
 @RestController
 public class ItbiPaymentSlipsRest implements ItbiPaymentSlipsAPI {
 
@@ -25,14 +31,26 @@ public class ItbiPaymentSlipsRest implements ItbiPaymentSlipsAPI {
   }
 
   @Override
+  @Operation(
+    summary = "Create a new ITBI payment slip",
+    description = "Creates an ITBI payment slip from the data provided in the request body."
+  )
   public ItbiPaymentSlip createItbiPaymentSlip(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Data for ITBI payment slip creation", required = true)
     ItbiPaymentSlipInsertInDTO itbiPaymentSlipInDTO
   ) {
     return itbiPaymentSlipCreateUseCase.create(itbiPaymentSlipInDTO);
   }
 
   @Override
-  public ItbiPaymentSlip findById(UUID id) {
-    return itbiPaymentSlipFindByIdUseCase.findById(id);
+  @Operation(
+    summary = "Find ITBI payment slip by ID",
+    description = "Returns an ITBI payment slip by its UUID."
+  )
+  public ItbiPaymentSlip findById(
+    @Parameter(description = "ITBI payment slip UUID", required = true)
+    UUID itbiPaymentSlipId
+  ) {
+    return itbiPaymentSlipFindByIdUseCase.findById(itbiPaymentSlipId);
   }
 }

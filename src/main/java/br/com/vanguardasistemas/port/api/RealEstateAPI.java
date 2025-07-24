@@ -22,7 +22,7 @@ public interface RealEstateAPI {
     @Valid @RequestBody RealEstateInsertInDTO realEstateInDTO
   );
 
-  @GetMapping("/{id}")
+  @GetMapping("/{realEstateId}")
   @ResponseStatus(HttpStatus.OK)
-  RealEstate findById(@Valid @PathVariable UUID id);
+  RealEstate findById(@Valid @PathVariable UUID realEstateId);
 } 

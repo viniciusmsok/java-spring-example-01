@@ -9,7 +9,7 @@
     <property name="fileExtensions" value="java, properties, xml"/>
 
     <module name="TreeWalker">
-        <!-- Indentação -->
+        <!-- Indentation -->
         <module name="Indentation">
             <property name="basicOffset" value="2"/>
             <property name="braceAdjustment" value="0"/>
@@ -19,13 +19,13 @@
             <property name="arrayInitIndent" value="2"/>
         </module>
 
-        <!-- Importações -->
+        <!-- Imports -->
         <module name="AvoidStarImport"/>
         <module name="IllegalImport"/>
         <module name="RedundantImport"/>
         <module name="UnusedImports"/>
 
-        <!-- Nomenclatura -->
+        <!-- Naming -->
         <module name="ConstantName"/>
         <module name="LocalFinalVariableName"/>
         <module name="LocalVariableName"/>
@@ -36,7 +36,7 @@
         <module name="StaticVariableName"/>
         <module name="TypeName"/>
 
-        <!-- Espaçamento -->
+        <!-- Whitespace -->
         <module name="EmptyForIteratorPad"/>
         <module name="GenericWhitespace"/>
         <module name="MethodParamPad"/>
@@ -49,14 +49,21 @@
         <module name="WhitespaceAround"/>
     </module>
 
-    <!-- Limite de tamanho de linha -->
+    <!-- Line length limit -->
     <module name="LineLength">
       <property name="max" value="120"/>
       <property name="ignorePattern" value="^package.*|^import.*"/>
     </module>
 
-    <!-- Verificação de arquivos -->
+    <!-- File verification -->
     <module name="NewlineAtEndOfFile"/>
     <module name="FileLength"/>
     <module name="FileTabCharacter"/>
+
+    <!-- Rule to ensure that @Operation has summary and description on separate lines -->
+    <module name="RegexpMultiline">
+      <property name="format" value="@Operation\(summary = .+, description = .+\)" />
+      <property name="message" value="@Operation summary and description must be on separate lines." />
+      <property name="illegalPattern" value="true"/>
+    </module>
 </module> 

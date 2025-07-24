@@ -9,7 +9,11 @@ import br.com.vanguardasistemas.application.usecase.notaryoffice.NotaryOfficeCre
 import br.com.vanguardasistemas.application.usecase.notaryoffice.NotaryOfficeFindByIdUseCase;
 import br.com.vanguardasistemas.domain.model.NotaryOffice;
 import br.com.vanguardasistemas.port.api.NotaryOfficesAPI;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Notary Offices", description = "Operations related to notary offices")
 @RestController
 public class NotaryOfficesRest implements NotaryOfficesAPI {
 
@@ -25,14 +29,26 @@ public class NotaryOfficesRest implements NotaryOfficesAPI {
   }
 
   @Override
+  @Operation(
+    summary = "Create a new notary office",
+    description = "Creates a notary office from the data provided in the request body."
+  )
   public NotaryOffice createNotaryOffice(
+    @io.swagger.v3.oas.annotations.parameters.RequestBody(description = "Data for notary office creation", required = true)
     NotaryOfficeInsertInDTO notaryOfficeInsertInDTO
   ) {
     return notaryOfficeCreateUseCase.create(notaryOfficeInsertInDTO);
   }
 
   @Override
-  public NotaryOffice findById(UUID id) {
-    return notaryOfficeFindByIdUseCase.findById(id);
+  @Operation(
+    summary = "Find notary office by ID",
+    description = "Returns a notary office by its UUID."
+  )
+  public NotaryOffice findById(
+    @Parameter(description = "Notary office UUID", required = true)
+    UUID notaryOfficeId
+  ) {
+    return notaryOfficeFindByIdUseCase.findById(notaryOfficeId);
   }
 }

@@ -20,7 +20,7 @@ public interface PeopleAPI {
   @ResponseStatus(HttpStatus.CREATED)
   Person createPerson(@Valid @RequestBody PersonInsertInDTO personInDTO);
 
-  @GetMapping("/{id}")
+  @GetMapping("/{personId}")
   @ResponseStatus(HttpStatus.OK)
-  Person findById(@Valid @PathVariable UUID id);
+  Person findById(@Valid @PathVariable UUID personId);
 }

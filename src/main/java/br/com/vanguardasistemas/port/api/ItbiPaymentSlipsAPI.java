@@ -22,7 +22,7 @@ public interface ItbiPaymentSlipsAPI {
     @Valid @RequestBody ItbiPaymentSlipInsertInDTO itbiPaymentSlipInDTO
   );
 
-  @GetMapping("/{id}")
+  @GetMapping("/{itbiPaymentSlipId}")
   @ResponseStatus(HttpStatus.OK)
-  ItbiPaymentSlip findById(@Valid @PathVariable UUID id);
+  ItbiPaymentSlip findById(@Valid @PathVariable UUID itbiPaymentSlipId);
 }

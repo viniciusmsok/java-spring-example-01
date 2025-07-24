@@ -9,7 +9,10 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.vanguardasistemas.adapter.mapper.HealthCheckDTOMapper;
 import br.com.vanguardasistemas.port.api.HealthCheckAPI;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 
+@Tag(name = "Health Check", description = "API health check")
 @RestController
 public class HealthCheckRest implements HealthCheckAPI {
 
@@ -20,6 +23,10 @@ public class HealthCheckRest implements HealthCheckAPI {
   }
 
   @Override
+  @Operation(
+    summary = "Check application health",
+    description = "Returns the application status and basic information."
+  )
   public ResponseEntity<Map<String, Object>> check() {
     try {
       return ResponseEntity.ok(healthCheckDTOMapper.check());

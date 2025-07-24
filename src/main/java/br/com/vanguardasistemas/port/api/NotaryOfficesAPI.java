@@ -22,7 +22,7 @@ public interface NotaryOfficesAPI {
     @Valid @RequestBody NotaryOfficeInsertInDTO notaryOfficeInDTO
   );
 
-  @GetMapping("/{id}")
+  @GetMapping("/{notaryOfficeId}")
   @ResponseStatus(HttpStatus.OK)
-  NotaryOffice findById(@Valid @PathVariable UUID id);
+  NotaryOffice findById(@Valid @PathVariable UUID notaryOfficeId);
 }
