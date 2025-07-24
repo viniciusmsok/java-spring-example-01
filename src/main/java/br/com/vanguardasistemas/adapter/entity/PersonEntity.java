@@ -2,8 +2,8 @@ package br.com.vanguardasistemas.adapter.entity;
 
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import jakarta.persistence.CascadeType;
@@ -29,8 +29,8 @@ import lombok.NoArgsConstructor;
 public class PersonEntity {
 
   @Id
-  @GeneratedValue(generator = "UUID")
-  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+  @GeneratedValue
+  @UuidGenerator
   @Column(name = "person_id", updatable = false, nullable = false, columnDefinition = "CHAR(36)")
   @JdbcTypeCode(SqlTypes.CHAR)
   private UUID personId;

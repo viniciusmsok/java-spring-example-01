@@ -2,8 +2,8 @@ package br.com.vanguardasistemas.adapter.entity;
 
 import java.util.UUID;
 
-import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.JdbcTypeCode;
+import org.hibernate.annotations.UuidGenerator;
 import org.hibernate.type.SqlTypes;
 
 import jakarta.persistence.Column;
@@ -24,8 +24,8 @@ import lombok.NoArgsConstructor;
 @Table(name = "notary_offices")
 public class NotaryOfficeEntity {
   @Id
-  @GeneratedValue(generator = "UUID")
-  @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
+  @GeneratedValue
+  @UuidGenerator
   @Column(name = "notary_office_id", updatable = false, nullable = false, columnDefinition = "CHAR(36)")
   @JdbcTypeCode(SqlTypes.CHAR)
   private UUID notaryOfficeId;
