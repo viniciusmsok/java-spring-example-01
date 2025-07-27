@@ -85,8 +85,54 @@ The project uses MySQL 8.0 with the following configurations:
 
 - Port: 3306
 - Database: payment_slip
-- User: root
-- Password: dados123
+- User: your_username
+- Password: your_password
+
+### Environment Variables
+
+The application uses environment variables for configuration. You can set them in several ways:
+
+1. **Using .env file (Recommended for development):**
+   ```bash
+   # Copy the example file
+   cp env.example .env
+   
+   # Edit the .env file with your settings
+   # Then load the variables
+   scripts/load-env.bat
+   # or
+   .\scripts\load-env.ps1
+   ```
+
+2. **Direct environment variables:**
+   ```bash
+   export DB_URL=jdbc:mysql://localhost:3306/payment_slip
+export DB_USERNAME=your_username
+export DB_PASSWORD=your_password
+   ```
+
+3. **System environment variables:**
+   Set them in your system's environment variables.
+
+### Available Environment Variables
+
+#### Server Configuration
+- `SERVER_PORT` - Application port (default: 5000)
+
+#### Database Configuration
+- `DB_URL` - Database connection URL
+- `DB_USERNAME` - Database username
+- `DB_PASSWORD` - Database password
+- `DB_DRIVER` - Database driver class
+
+#### Database Pool Configuration
+- `DB_CONNECTION_TIMEOUT` - Connection timeout (ms)
+- `DB_MAX_POOL_SIZE` - Maximum pool size
+- `DB_MIN_IDLE` - Minimum idle connections
+
+#### JPA Configuration
+- `JPA_SHOW_SQL` - Show SQL queries
+- `JPA_FORMAT_SQL` - Format SQL output
 
 ### Project Configurations
 
@@ -118,6 +164,11 @@ docker-compose down
 ### Using Maven
 
 ```bash
+# Load environment variables first (recommended)
+scripts/load-env.bat
+# or
+.\scripts\load-env.ps1
+
 # Compile and execute
 mvn spring-boot:run
 
@@ -136,13 +187,13 @@ java -jar target/payment-slip-0.0.1-SNAPSHOT.jar
 #### Windows (Batch)
 ```bash
 # Build and run automatically
-build-and-run.bat
+scripts/build-and-run.bat
 ```
 
 #### Windows (PowerShell)
 ```powershell
 # Build and run automatically
-.\build-and-run.ps1
+.\scripts\build-and-run.ps1
 ```
 
 ## Endpoints
@@ -225,47 +276,55 @@ To contribute to the project:
 3. Maintain the hexagonal architecture
 4. Write tests for new features
 
-## Resumo das Alterações Realizadas
+## Summary of Changes Made
 
-✅ **Configuração do Projeto:**
-- **Nome do projeto:** `vanguarda-sistemas` → `payment-slip`
-- **Domínio mantido:** `br.com.vanguardasistemas`
-- **Descrição:** "Payment Slip Application - Vanguarda Sistemas"
+✅ **Project Configuration:**
+- **Project name:** `vanguarda-sistemas` → `payment-slip`
+- **Domain maintained:** `br.com.vanguardasistemas`
+- **Description:** "Payment Slip Application - Vanguarda Sistemas"
 
-✅ **Scripts de Build:**
-- Atualizados `build-and-run.bat` e `build-and-run.ps1`
-- Nome do JAR: `payment-slip-0.0.1-SNAPSHOT.jar`
+✅ **Build Scripts:**
+- Updated `scripts/build-and-run.bat` and `scripts/build-and-run.ps1`
+- JAR name: `payment-slip-0.0.1-SNAPSHOT.jar`
 
-✅ **Documentação:**
-- README.md atualizado com novo nome do projeto
-- Título da aplicação: "Payment Slip"
-- Empresa mantida: "Vanguarda Sistemas"
+✅ **Documentation:**
+- README.md updated with new project name
+- Application title: "Payment Slip"
+- Company maintained: "Vanguarda Sistemas"
 
-✅ **Interface da Aplicação:**
-- Endpoint raiz (`/`): Título atualizado para "Payment Slip API"
-- Swagger UI: Título atualizado para "Payment Slip API"
-- Health Check: Nome do serviço atualizado
+✅ **Application Interface:**
+- Root endpoint (`/`): Title updated to "Payment Slip API"
+- Swagger UI: Title updated to "Payment Slip API"
+- Health Check: Service name updated
 
-✅ **Testes:**
-- Teste do RootRest atualizado para verificar o novo nome
+✅ **Tests:**
+- RootRest test updated to verify new name
 
-✅ **Classe Principal:**
-- Renomeada: `VanguardaSistemasApplication` → `PaymentSlipApplication`
-- Referências atualizadas no `pom.xml` e `README.md`
+✅ **Main Class:**
+- Renamed: `VanguardaSistemasApplication` → `PaymentSlipApplication`
+- References updated in `pom.xml` and `README.md`
 
-### Estrutura Final:
+✅ **Environment Variables:**
+- Database configuration moved to environment variables
+- `env.example` file created with default configurations
+- Scripts `scripts/load-env.bat` and `scripts/load-env.ps1` to load variables
+- `DatabaseConfig` class for validation and configuration logging
+- Build scripts updated to automatically load variables
+- **Optimization:** Only 10 essential variables maintained, other configurations with fixed default values
+
+### Final Structure:
 ```
-br.com.vanguardasistemas (domínio/empresa)
-└── payment-slip (aplicação)
+br.com.vanguardasistemas (domain/company)
+└── payment-slip (application)
     ├── payment-slip-0.0.1-SNAPSHOT.jar
-    └── [todos os arquivos do projeto]
+    └── [all project files]
 ```
 
-Agora você pode gerar o JAR com o comando:
+Now you can generate the JAR with the command:
 ```bash
 mvn clean package
 ```
 
-E o arquivo será gerado como: `target/payment-slip-0.0.1-SNAPSHOT.jar`
+And the file will be generated as: `target/payment-slip-0.0.1-SNAPSHOT.jar`
 
-O domínio `br.com.vanguardasistemas` foi mantido como solicitado, e apenas o nome da aplicação foi alterado para `PaymentSlip`.
+The domain `br.com.vanguardasistemas` was maintained as requested, and only the application name was changed to `PaymentSlip`.
