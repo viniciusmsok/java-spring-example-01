@@ -7,8 +7,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @OpenAPIDefinition(
     info = @Info(
-        title = "Vanguarda Sistemas API",
-        description = "Documentação dos endpoints da API do projeto Vanguarda Sistemas.",
+        title = "Payment Slip API",
+        description = "Documentação dos endpoints da API do sistema Payment Slip da Vanguarda Sistemas.",
         version = "1.0"
     )
 )

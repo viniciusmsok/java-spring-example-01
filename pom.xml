@@ -12,10 +12,10 @@
     </parent>
 
     <groupId>br.com.vanguardasistemas</groupId>
-    <artifactId>vanguarda-sistemas</artifactId>
+    <artifactId>payment-slip</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>vanguarda-sistemas</name>
-    <description>Projeto Vanguarda Sistemas</description>
+    <name>payment-slip</name>
+    <description>Payment Slip Application - Vanguarda Sistemas</description>
 
     <properties>
         <java.version>17</java.version>
@@ -82,7 +82,16 @@
                             <artifactId>lombok</artifactId>
                         </exclude>
                     </excludes>
+                    <mainClass>br.com.vanguardasistemas.PaymentSlipApplication</mainClass>
+                    <layout>JAR</layout>
                 </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

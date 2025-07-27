@@ -34,7 +34,7 @@ public class HealthCheckRest implements HealthCheckAPI {
       Map<String, Object> errorResponse = new HashMap<>();
       errorResponse.put("status", "DOWN");
       errorResponse.put("timestamp", LocalDateTime.now());
-      errorResponse.put("service", "Vanguarda Sistemas API");
+      errorResponse.put("service", "Payment Slip API");
       errorResponse.put("error", "Health check failed");
 
       return ResponseEntity.status(503).body(errorResponse);

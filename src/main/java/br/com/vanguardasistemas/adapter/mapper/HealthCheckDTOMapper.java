@@ -20,7 +20,7 @@ public class HealthCheckDTOMapper {
   public Map<String, Object> check() {
     Map<String, Object> response = new HashMap<>();
     response.put("timestamp", LocalDateTime.now());
-    response.put("service", "Vanguarda Sistemas API");
+    response.put("service", "Payment Slip API");
 
     boolean allHealthy = true;
     Map<String, Object> checks = new HashMap<>();

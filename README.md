@@ -1,6 +1,8 @@
-# Vanguarda Sistemas
+# Payment Slip
 
-Project developed with Spring Boot and Hexagonal Architecture (Ports and Adapters).
+Payment Slip application developed with Spring Boot and Hexagonal Architecture (Ports and Adapters).
+
+**Company:** Vanguarda Sistemas
 
 ## Technologies Used
 
@@ -36,7 +38,7 @@ src/main/java/br/com/vanguardasistemas/
 │   ├── interceptor/      # Interceptors
 │   ├── mapper/           # Adapter mappers
 │   └── rest/             # REST controllers
-└── VanguardaSistemasApplication.java
+└── PaymentSlipApplication.java
 ```
 
 ### Criteria for Creating New Classes
@@ -121,14 +123,44 @@ mvn spring-boot:run
 
 # Check code style
 mvn checkstyle:check
+
+# Generate JAR file
+mvn clean package
+
+# Run JAR file
+java -jar target/payment-slip-0.0.1-SNAPSHOT.jar
+```
+
+### Using Scripts
+
+#### Windows (Batch)
+```bash
+# Build and run automatically
+build-and-run.bat
+```
+
+#### Windows (PowerShell)
+```powershell
+# Build and run automatically
+.\build-and-run.ps1
 ```
 
 ## Endpoints
 
+### Root Page
+
+```
+GET /
+```
+
+Returns an HTML page with links to:
+- Swagger Documentation (`/swagger-ui/index.html`)
+- Health Check (`/health-check`)
+
 ### Health Check
 
 ```
-GET /health
+GET /health-check
 ```
 
 Returns the system status including:
@@ -144,7 +176,7 @@ Example response:
 {
   "status": "UP",
   "timestamp": "2024-03-14T10:30:00.123",
-  "service": "Vanguarda Sistemas API",
+  "service": "Payment Slip API",
   "database": {
     "status": "UP",
     "message": "Database connection is healthy"
@@ -192,3 +224,48 @@ To contribute to the project:
 2. Execute `mvn checkstyle:check` before committing
 3. Maintain the hexagonal architecture
 4. Write tests for new features
+
+## Resumo das Alterações Realizadas
+
+✅ **Configuração do Projeto:**
+- **Nome do projeto:** `vanguarda-sistemas` → `payment-slip`
+- **Domínio mantido:** `br.com.vanguardasistemas`
+- **Descrição:** "Payment Slip Application - Vanguarda Sistemas"
+
+✅ **Scripts de Build:**
+- Atualizados `build-and-run.bat` e `build-and-run.ps1`
+- Nome do JAR: `payment-slip-0.0.1-SNAPSHOT.jar`
+
+✅ **Documentação:**
+- README.md atualizado com novo nome do projeto
+- Título da aplicação: "Payment Slip"
+- Empresa mantida: "Vanguarda Sistemas"
+
+✅ **Interface da Aplicação:**
+- Endpoint raiz (`/`): Título atualizado para "Payment Slip API"
+- Swagger UI: Título atualizado para "Payment Slip API"
+- Health Check: Nome do serviço atualizado
+
+✅ **Testes:**
+- Teste do RootRest atualizado para verificar o novo nome
+
+✅ **Classe Principal:**
+- Renomeada: `VanguardaSistemasApplication` → `PaymentSlipApplication`
+- Referências atualizadas no `pom.xml` e `README.md`
+
+### Estrutura Final:
+```
+br.com.vanguardasistemas (domínio/empresa)
+└── payment-slip (aplicação)
+    ├── payment-slip-0.0.1-SNAPSHOT.jar
+    └── [todos os arquivos do projeto]
+```
+
+Agora você pode gerar o JAR com o comando:
+```bash
+mvn clean package
+```
+
+E o arquivo será gerado como: `target/payment-slip-0.0.1-SNAPSHOT.jar`
+
+O domínio `br.com.vanguardasistemas` foi mantido como solicitado, e apenas o nome da aplicação foi alterado para `PaymentSlip`.
