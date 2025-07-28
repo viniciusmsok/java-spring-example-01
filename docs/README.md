@@ -2,6 +2,8 @@
 
 Payment Slip application developed with Spring Boot and Hexagonal Architecture (Ports and Adapters).
 
+Swagger (DEV Environment): http://payment-slip.us-east-2.elasticbeanstalk.com/swagger-ui/swagger-ui/index.html
+
 **Company:** Vanguarda Sistemas
 
 ## Technologies Used
